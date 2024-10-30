@@ -1,0 +1,14 @@
+version: '3.11'
+
+services:
+  
+  cymae-python:
+    env_file:
+      - dev.env
+    image: cymae/python
+    volumes:
+      - ./data:/service/data
+    container_name: cymae-python
+    build:
+      context: .
+      dockerfile: ./Dockerfile
