@@ -74,14 +74,16 @@ for input_path in fcs_files:
         print("done tensor")
         print(inference_input)
 
-        print("running model")
-        # with torch.no_grad():
-        predictions = model(inference_input)
-        predictions = torch.max(predictions,1)[1]
-        predictions = [idx_to_class[idx.item()] for idx in predictions]
+        print("running inference")
+        with torch.no_grad():
+            predictions = model(inference_input)
+            predictions = torch.max(predictions,1)[1]
+            predictions = [idx_to_class[idx.item()] for idx in predictions]
 
         print("writing to output dir")    
 
-#         output_path = OUTPUT_DIR + '/' + input_path.split("/")[-1].replace(".fcs", "_cymae.json")
-#         json.dump(preds, open(output_path, "w"))
-#         print("done")
+        output_path = OUTPUT_DIR + '/' + input_path.split("/")[-1].replace(".fcs", "_cymae.json")
+        json.dump(predictions, open(output_path, "w"))
+        print("done processing file")
+
+print("completed")
