@@ -70,20 +70,26 @@ for input_path in fcs_files:
         input_data = input_data[marker_list].values
         input_data = np.arcsinh(input_data)
         print("starting tensor")
-        inference_input = torch.tensor(input_data).to(device) # torch.tensor (C, 30)
+        input_data = torch.tensor(input_data).to(device) # torch.tensor (C, 30)
         print("done tensor")
-        print(inference_input)
+        print(input_data)
+
+        batch_size = 1024
+        preds = []
 
         print("running inference")
         with torch.no_grad():
-            predictions = model(inference_input)
-            predictions = torch.max(predictions,1)[1]
-            predictions = [idx_to_class[idx.item()] for idx in predictions]
+            for i in range(0, input_data.size(0), batch_size):
+                batch_data = input_data[i:i + batch_size]
+                batch_preds = model(batch_data)
+                batch_preds = torch.max(batch_preds, 1)[1]
+                batch_preds = [idx_to_class[idx.item()] for idx in batch_preds]
+                preds.extend(batch_preds)
 
         print("writing to output dir")    
 
         output_path = OUTPUT_DIR + '/' + input_path.split("/")[-1].replace(".fcs", "_cymae.json")
-        json.dump(predictions, open(output_path, "w"))
+        json.dump(preds, open(output_path, "w"))
         print("done processing file")
 
 print("completed")
