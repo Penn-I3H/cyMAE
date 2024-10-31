@@ -1,6 +1,8 @@
-FROM continuumio/miniconda3:latest
+FROM pytorch/pytorch
 
 WORKDIR /service
+
+RUN apt clean && apt-get update
 
 COPY . .
 
@@ -9,10 +11,8 @@ RUN ls /service
 RUN mkdir -p data
 
 # Add additional dependencies below ...
-RUN conda env create -f environment.yml
+RUN pip install -r /service/requirements.txt
+RUN python -V
+RUN python3.10 -V
 
-ENV PATH=/opt/conda/envs/cymae/bin:$PATH
-
-
-ENTRYPOINT [ "python3.11", "/service/main.py" ]
-# CMD ["python3.11", "/service/main.py"]
+ENTRYPOINT [ "python3.10", "/service/main.py" ]
