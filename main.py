@@ -1,7 +1,5 @@
 #!/usr/bin/env python3.11
 
-import sys
-import shutil
 import os
 import glob
 import torch
@@ -62,10 +60,16 @@ def main():
             input_data = np.arcsinh(input_data)
             input_data = torch.tensor(input_data).to(device) # torch.tensor (C, 30)
 
+            batch_size = 1024
+            preds = []
+
             with torch.no_grad():
-                preds = model(input_data)
-                preds = torch.max(preds,1)[1]
-                preds = [idx_to_class[idx.item()] for idx in preds]
+                for i in range(0, input_data.size(0), batch_size):
+                    batch_data = input_data[i:i + batch_size]
+                    batch_preds = model(batch_data)
+                    batch_preds = torch.max(batch_preds, 1)[1]
+                    batch_preds = [idx_to_class[idx.item()] for idx in batch_preds]
+                    preds.extend(batch_preds)
 
             output_path = OUTPUT_DIR + '/' + input_path.split("/")[-1].replace(".fcs", "_cymae.json")
             json.dump(preds, open(output_path, "w"))
