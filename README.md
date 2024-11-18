@@ -1,5 +1,16 @@
-# cymae_application
+# CyMAE Application
 
-I put `MDIPA_DORA_002_3MO_Processed.fcs` in `./service/data/input` directory as a test file.
+To run locally:
 
-If `Dockerfile` works properly, `MDIPA_DORA_002_3MO_Processed_cymae.json` file, which contains a list of predicted cell type for each cell by cyMAE, will be created in `./service/data/output` directory.
+Run: `docker-compose up --build`
+
+The above will create a `data` directory in your root directory locally.
+
+The example copies files from the `INPUT_DIR` directory to the `OUTPUT_DIR` directory. The directories are set in `dev.env` and are defaulted to `/service/data/input` and `/service/data/ouput` for the input and output directories respectively.
+To test, create `input` and `output` subfolders in the `data` directory. Create a test file (for example `test.fcs`) in the `/service/data/input` directory. 
+
+Re-Run: `docker-compose up --build`
+
+The png file of predicted outcome should be created in the `data/output` directory.
+
+The current version supports python version 3.10.
