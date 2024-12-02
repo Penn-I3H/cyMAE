@@ -92,6 +92,8 @@ cell_type_mapping = {
     'IgDposMemB': 'B cells',
     'IgDnegMemB': 'B cells',
     'Plasmablast': 'B cells',
+    # Basophil
+    'Basophil': 'Basophil',
     # CD4 T cells
     'CD4Naive': 'CD4 T cells',
     'Th1': 'CD4 T cells',
@@ -107,6 +109,10 @@ cell_type_mapping = {
     'DPT/activated': 'CD4 T cells',
     'nnCD4CXCR5pos': 'CD4 T cells',
     'nnCD4CXCR5pos/activated': 'CD4 T cells',
+    # CD45hiCD66bpos
+    'CD45hiCD66bpos': 'CD45hiCD66bpos',
+    # CD66bnegCD45lo
+    'CD66bnegCD45lo': 'CD66bnegCD45lo',
     # CD8 T cells
     'CD8Naive': 'CD8 T cells',
     'CD8Naive/activated': 'CD8 T cells',
@@ -120,28 +126,26 @@ cell_type_mapping = {
     'CD8TEMRA/activated': 'CD8 T cells',
     'CD8TCM': 'CD8 T cells',
     'CD8TCM/activated': 'CD8 T cells',
+    # Eosinophils
+    'Eosinophil': 'Eosinophil',
+    # ILC
+    'ILC': 'ILC',
+    # Monocytes/mDC
+    'ClassicalMono': 'Monocytes/mDC',
+    'TotalMonocyte': 'Monocytes/mDC',
+    'mDC': 'Monocytes/mDC',
+    # NK cell
+    'EarlyNK': 'NK cell',
+    'LateNK': 'NK cell',
+    # Neutrophil
+    'Neutrophil': 'Neutrophil',
     # Other T cells
-    'MAITNKT': 'Innate T cells',
-    'gdT': 'Innate T cells',
-    'DNT': 'Double Negative T cells',
-    'DNT/activated': 'Double Negative T cells',
-    # Monocytes
-    'ClassicalMono': 'Monocytes',
-    'TotalMonocyte': 'Monocytes',
-    # NK cells
-    'EarlyNK': 'NK cells',
-    'LateNK': 'NK cells',
-    # Dendritic cells
-    'pDC': 'Dendritic cells',
-    'mDC': 'Dendritic cells',
-    # Granulocytes
-    'Neutrophil': 'Granulocytes',
-    'Eosinophil': 'Granulocytes',
-    'Basophil': 'Granulocytes',
-    # Other cell types
-    'ILC': 'Others',
-    'CD66bnegCD45lo': 'Others',
-    'CD45hiCD66bpos': 'Others',
+    'MAITNKT': 'Other T cells',
+    'gdT': 'Other T cells',
+    'DNT': 'Other T cells',
+    'DNT/activated': 'Other T cells',
+    # pDC
+    'pDC': 'pDC',
 }
 
 # Cell types of interest (for highlighting in the UMAP plot)
